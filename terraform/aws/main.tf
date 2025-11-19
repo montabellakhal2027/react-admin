@@ -78,10 +78,17 @@ resource "aws_instance" "web_server" {
   }
 }
 
-resource "aws_ec2_spot_instance_request" "cheap_server" {
+resource "aws_instance" "cheap_server" {
   ami           = "ami-12345678"
   instance_type = "t3.micro"
-  spot_price    = "0.003"  
+  
+  spot_price = "0.003"       
+  instance_market_options {
+    market_type = "spot"
+  }
+
+  subnet_id               = aws_subnet.main_subnet.id
+  vpc_security_group_ids  = [aws_security_group.main_sg.id]
 
   tags = {
     Name        = "spot-web-server"
