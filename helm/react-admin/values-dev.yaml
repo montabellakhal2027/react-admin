@@ -1,0 +1,39 @@
+# Development environment overrides
+replicaCount: 1
+
+image:
+  tag: "dev"
+  pullPolicy: Always
+
+service:
+  type: NodePort
+  nodePort: 30081
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+autoscaling:
+  enabled: false  # Disable autoscaling in dev
+
+ingress:
+  enabled: true
+  hosts:
+    - host: dev.react-admin.yourdomain.com
+      paths:
+        - path: /
+          pathType: Prefix
+
+env:
+  - name: NODE_ENV
+    value: "development"
+  - name: REACT_APP_API_URL
+    value: "http://dev-api.yourdomain.com"
+  - name: REACT_APP_TITLE
+    value: "React Admin - DEV"
+  - name: DEBUG
+    value: "true"
