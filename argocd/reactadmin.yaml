@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/montabellakhal2027/react-admin'
-    targetRevision: argocd-deploy  # Use the clean branch
+    targetRevision: master
     path: k8s
   destination:
     server: 'https://kubernetes.default.svc'
