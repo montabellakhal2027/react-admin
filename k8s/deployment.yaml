@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: react-container
-          image: monta2027/react:build-38
+          image: monta2027/react:8-654d85f
           ports:
             - containerPort: 3001
 
