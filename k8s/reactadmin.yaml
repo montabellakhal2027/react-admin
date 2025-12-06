@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: reactadmin
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/montabellakhal2027/react-admin'
+    targetRevision: master
+    path: k8s
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 3
+      backoff:
+        duration: 30s
+        maxDuration: 2m
+        factor: 2

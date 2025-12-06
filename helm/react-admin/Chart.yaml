@@ -1,0 +1,17 @@
+apiVersion: v2
+name: react-admin
+description: React Admin Dashboard - Production Deployment
+type: application
+version: 1.0.0
+appVersion: "4.0.0"
+keywords:
+  - react
+  - admin
+  - dashboard
+  - kubernetes
+maintainers:
+  - name: Monta Bellkhal
+    email: monta.bellkhal10@gmail.com
+home: https://github.com/montabellakhal2027/react-admin-k8s
+sources:
+  - https://github.com/marmelab/react-admin
