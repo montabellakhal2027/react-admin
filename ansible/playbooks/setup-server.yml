@@ -1,0 +1,9 @@
+---
+- hosts: k8s-master
+  become: yes
+  roles:
+    - docker
+    - k8s_tools
+    - helm
+    - nginx
+    - node_exporter

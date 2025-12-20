@@ -1,0 +1,37 @@
+---
+- name: Create keyrings directory
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+
+- name: Add Jenkins GPG key
+  ansible.builtin.shell: |
+    curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | gpg --dearmor -o /etc/apt/keyrings/jenkins.gpg
+  args:
+    creates: /etc/apt/keyrings/jenkins.gpg
+
+- name: Set permissions on Jenkins GPG key
+  file:
+    path: /etc/apt/keyrings/jenkins.gpg
+    mode: '0644'
+
+- name: Add Jenkins repository
+  apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/jenkins.gpg] https://pkg.jenkins.io/debian-stable binary/"
+    state: present
+    update_cache: yes
+
+- name: Install Java & Jenkins
+  apt:
+    name:
+      - openjdk-21-jdk
+      - jenkins
+    state: present
+    update_cache: yes
+
+- name: Start Jenkins
+  systemd:
+    name: jenkins
+    state: started
+    enabled: yes

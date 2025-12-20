@@ -1,0 +1,7 @@
+---
+- hosts: k8s-master
+  become: yes
+  roles:
+    - jenkins
+
+
